@@ -32,11 +32,11 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AddOrder([FromBody] Order order)
-    {
-        _orderService.SaveOrder(order);
-        return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, order);
-    }
+        public IActionResult AddOrder([FromBody] Order order)
+        {
+            _orderService.SaveOrder(order); // Assuming SaveOrder internally calls AddOrder in the repository
+            return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, order);
+        }
 
     [HttpPut("{id}")]
     public IActionResult UpdateOrder(int id, [FromBody] Order order)

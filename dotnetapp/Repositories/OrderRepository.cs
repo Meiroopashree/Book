@@ -14,6 +14,11 @@ namespace dotnetapp.Repositories
             _context = context;
         }
 
+        public void AddOrder(Order order)
+        {
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
         public List<Order> GetOrders() => _context.Orders.ToList();
 
         public Order GetOrder(int id) => _context.Orders.FirstOrDefault(o => o.OrderId == id);

@@ -4,36 +4,53 @@ using dotnetapp.Models;
 namespace dotnetapp.Repositories
 {
 
+// BookRepository.cs
+using System.Collections.Generic;
+using System.Linq;
+using dotnetapp.Models;
+
 public class BookRepository
 {
-    private List<Book> books = new List<Book>();
+    private readonly ApplicationDbContext _context;
 
-    public List<Book> GetBooks() => books;
+    public BookRepository(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
-    public Book GetBook(int id) => books.Find(b => b.BookId == id);
+    public List<Book> GetBooks() => _context.Books.ToList();
 
-    public void SaveBook(Book book) => books.Add(book);
+    public Book GetBook(int id) => _context.Books.Find(id);
+
+    public void SaveBook(Book book)
+    {
+        _context.Books.Add(book);
+        _context.SaveChanges();
+    }
 
     public void UpdateBook(int id, Book book)
     {
-        var existingBook = books.Find(b => b.BookId == id);
+        var existingBook = _context.Books.Find(id);
         if (existingBook != null)
         {
             existingBook.BookName = book.BookName;
             existingBook.Category = book.Category;
             existingBook.Price = book.Price;
+            _context.SaveChanges();
         }
     }
 
-   public bool DeleteBook(int id)
+    public bool DeleteBook(int id)
     {
-        var bookToRemove = books.Find(b => b.BookId == id);
+        var bookToRemove = _context.Books.Find(id);
         if (bookToRemove != null)
         {
-            books.Remove(bookToRemove);
+            _context.Books.Remove(bookToRemove);
+            _context.SaveChanges();
             return true;
         }
         return false;
     }
 }
+
 }

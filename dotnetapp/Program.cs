@@ -15,10 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
-builder.Services.AddSingleton<BookRepository>();
-builder.Services.AddSingleton<OrderRepository>();
-builder.Services.AddSingleton<IBookService, BookService>();
-builder.Services.AddSingleton<IOrderService, OrderService>();
+builder.Services.AddScoped<ApplicationDbContext>(); // Add this line to register ApplicationDbContext as a scoped service
+    builder.Services.AddScoped<IOrderService, OrderService>(); // Assuming you have an IOrderService
+    builder.Services.AddScoped<OrderRepository>();
+    builder.Services.AddScoped<IBookService, BookService>(); // Assuming you have an IOrderService
+    builder.Services.AddScoped<BookRepository>();
 
 
 builder.Services.AddControllers();
