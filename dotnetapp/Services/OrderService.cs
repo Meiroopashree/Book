@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using dotnetapp.Models;
+using dotnetapp.Repositories;
 
 namespace dotnetapp.Services
 {
@@ -19,6 +21,7 @@ public class OrderService : IOrderService
 
     public void UpdateOrder(int id, Order order) => _repository.UpdateOrder(id, order);
 
-    public void DeleteOrder(int id) => _repository.DeleteOrder(id);
+    public bool DeleteOrder(int id) => _repository.DeleteOrder(id);
 }
+
 }

@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using dotnetapp.Models;
+using dotnetapp.Services;
+using dotnetapp.Repositories;
 
-namespace.dotnetapp.Services
+
+namespace dotnetapp.Services
 {
 public class BookService : IBookService
 {
@@ -19,6 +23,7 @@ public class BookService : IBookService
 
     public void UpdateBook(int id, Book book) => _repository.UpdateBook(id, book);
 
-    public void DeleteBook(int id) => _repository.DeleteBook(id);
+    public bool DeleteBook(int id) => _repository.DeleteBook(id);
 }
+
 }

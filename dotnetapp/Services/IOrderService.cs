@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using dotnetapp.Models;
 
-namespace.dotnetapp.Services
+namespace dotnetapp.Services
 {
 public interface IOrderService
 {
@@ -8,6 +9,7 @@ public interface IOrderService
     Order GetOrder(int id);
     void SaveOrder(Order order);
     void UpdateOrder(int id, Order order);
-    void DeleteOrder(int id);
+    bool DeleteOrder(int id);
 }
+
 }

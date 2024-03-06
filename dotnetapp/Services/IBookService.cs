@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using dotnetapp.Models;
 
-namespace.dotnetapp.Services
+namespace dotnetapp.Services
 {
 public interface IBookService
 {
@@ -8,6 +9,7 @@ public interface IBookService
     Book GetBook(int id);
     void SaveBook(Book book);
     void UpdateBook(int id, Book book);
-    void DeleteBook(int id);
+    bool DeleteBook(int id);
 }
+
 }

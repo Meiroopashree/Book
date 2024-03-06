@@ -1,4 +1,4 @@
-namespace.dotnetapp.Models
+namespace dotnetapp.Models
 {
 public class Book
 {

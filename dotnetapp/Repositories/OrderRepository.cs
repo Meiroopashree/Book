@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using dotnetapp.Models;
 
 namespace dotnetapp.Repositories
 {
@@ -22,6 +23,15 @@ public class OrderRepository
         }
     }
 
-    public void DeleteOrder(int id) => orders.RemoveAll(o => o.OrderId == id);
+    public bool DeleteOrder(int id)
+    {
+        var orderToRemove = orders.Find(o => o.OrderId == id);
+        if (orderToRemove != null)
+        {
+            orders.Remove(orderToRemove);
+            return true;
+        }
+        return false;
+    }
 }
 }

@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using dotnetapp.Models;
+using dotnetapp.Services;
 
-namespace.dotnetapp.Controllers
+namespace dotnetapp.Controllers
 {
 
 [Route("api/[controller]")]
@@ -47,11 +48,11 @@ public class OrderController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteOrder(int id)
     {
-        var result = _orderService.DeleteOrder(id);
-        if (!result)
-            return NotFound();
+        if (_orderService.DeleteOrder(id))
+            return NoContent();
 
-        return NoContent();
+        return NotFound();
     }
+
 }
 }

@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using dotnetapp.Models;
+using dotnetapp.Services;
 
-namespace.dotnetapp.Controllers
+namespace dotnetapp.Controllers
 {
 
 [Route("api/[controller]")]
@@ -47,11 +48,12 @@ public class BookController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteBook(int id)
     {
-        var result = _bookService.DeleteBook(id);
-        if (!result)
-            return NotFound();
+        if (_bookService.DeleteBook(id))
+            return NoContent();
 
-        return NoContent();
+        return NotFound();
     }
+
+
 }
 }

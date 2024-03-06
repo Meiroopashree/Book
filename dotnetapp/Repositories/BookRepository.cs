@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using dotnetapp.Models;
 
 namespace dotnetapp.Repositories
 {
@@ -24,6 +25,15 @@ public class BookRepository
         }
     }
 
-    public void DeleteBook(int id) => books.RemoveAll(b => b.BookId == id);
+   public bool DeleteBook(int id)
+    {
+        var bookToRemove = books.Find(b => b.BookId == id);
+        if (bookToRemove != null)
+        {
+            books.Remove(bookToRemove);
+            return true;
+        }
+        return false;
+    }
 }
 }
